@@ -32,12 +32,13 @@ grid = [0:step:1];
 %% Generate Landscape
 
 initialize(2,1,1,0,1,0.5);
-plotlandscape(1,0,10);
+plotlandscape(1,0,10,3);
 
 %% Place Agents on landscape
 
 agents = place_agents(S, N);
-% figure
+
+%figure
 %hold on
 %plot(agents(:,1), agents(:,2),'rx'); 
 %hold off
@@ -48,6 +49,10 @@ agents = place_agents(S, N);
 for i=1:REPEAT
     for j=1:NUMITER
         agents = simulation(S, step, N, grid, agents, NR, Tr);
+        if (j ~= NUMITER)
+            %cla
+        end
+        j
     end
     
      

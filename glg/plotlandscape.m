@@ -1,4 +1,4 @@
-function z = plotlandscape(upper,lower,N)
+function z = plotlandscape(upper,lower,N, what)
 
 %--------------------------------------------------------------------------
 %This is the plotting function of the Gaussian landscape generator(2D only)
@@ -19,12 +19,12 @@ function z = plotlandscape(upper,lower,N)
 %Author: Bo Yuan (boyuan@itee.uq.edu.au)
 %--------------------------------------------------------------------------
 
-if nargin~=3
-    
-    disp('Usage: plotlandscape(upper,lower,N)');
-    return;
-    
-end
+% if nargin~=4
+%     
+%     disp('Usage: plotlandscape(upper,lower,N,what)');
+%     return;
+%     
+% end
 
 if upper<=lower
     
@@ -63,13 +63,17 @@ f=fitness(pos);        %evaluate individuals
 
 z=vec2mat(f,d)';       %transform into a matrix
 
-figure;
-  
-colormap(gray);        %3D surface plot
-surfl(x,y,z);
-shading interp;
+if (what == 1 || what == 3)
+    figure;
+    display('a');
+    colormap(gray);        %3D surface plot
+    surfl(x,y,z);
+    shading interp;
+end
 
-figure;
-
-[C,H]=contour(x,y,z);  %2D contour plot
-colorbar;
+if (what > 1)
+    figure;
+    display('b');
+    [C,H]=contour(x,y,z);  %2D contour plot
+    colorbar;
+end
