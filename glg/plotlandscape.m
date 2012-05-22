@@ -72,3 +72,4 @@ shading interp;
 figure;
 
 [C,H]=contour(x,y,z);  %2D contour plot
+colorbar;
