@@ -12,7 +12,7 @@ path(path, 'glg/');
 %% Init parameters
 
 REPEAT      = 1;
-NUMITER     = 1;
+NUMITER     = 10;
 
 N   = 100;      % n. of scientists
 NR  = 3;        % n. of reviewers for paper
@@ -47,7 +47,7 @@ agents = place_agents(S, N);
 %% Simulate
 for i=1:REPEAT
     for j=1:NUMITER
-        [scores score_stats diffs dists dists_stats] = simulation(S, step, N, grid, agents, NR, Tr);
+        agents = simulation(S, step, N, grid, agents, NR, Tr);
     end
     
      
