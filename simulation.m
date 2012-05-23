@@ -6,6 +6,9 @@ function agents = simulation( S, step, N, grid, agents, Nr , Tr)
     % convert a position on the grid to a point in space
     pos_agents = locateAgents(grid, agents);
     
+    %pos_agents
+    %agents
+    
     % compute the fitness of all the points
     f = fitness(pos_agents);
     
@@ -47,8 +50,8 @@ function agents = simulation( S, step, N, grid, agents, Nr , Tr)
 %     
 %     
 %    figure
-    %hold on
-%    plotlandscape(1,0,10,2);
+    hold on
+    %plotlandscape(1,0,10,2);
     plot(pos_agents(:,1),pos_agents(:,2),'bx'); 
     plot(publish_pos(:,1),publish_pos(:,2),'ro'); 
     refreshdata
@@ -63,7 +66,7 @@ function agents = simulation( S, step, N, grid, agents, Nr , Tr)
 %     
     xlim([0 1]);
     ylim([0 1]);
-    %hold off
+    hold off
    
     pause(1);
     
@@ -77,7 +80,7 @@ function agents = simulation( S, step, N, grid, agents, Nr , Tr)
     %hold off
     % Move
     
-    [agents new_fits] = move(N, grid, agents, f, publish_fit, publish_idx);
+    [agents new_fits] = move(S, N, grid, agents, f, publish_fit, publish_idx);
     
 end
 
