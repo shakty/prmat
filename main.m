@@ -12,7 +12,7 @@ path(path, 'glg/');
 %% Init parameters
 
 REPEAT      = 1;
-NUMITER     = 10;
+NUMITER     = 1;
 
 N   = 100;      % n. of scientists
 NR  = 3;        % n. of reviewers for paper
@@ -32,7 +32,7 @@ grid = [0:step:1];
 %% Generate Landscape
 
 initialize(2,200,1,0,1,0.9);
-plotlandscape(1,0,200,3);
+plotlandscape(1,0,300,3);
 
 %% Place Agents on landscape
 
@@ -48,7 +48,7 @@ agents = place_agents(S, N);
 %% Simulate
 for i=1:REPEAT
     for j=1:NUMITER
-        agents = simulation(S, step, N, grid, agents, NR, Tr);
+        %agents = simulation(S, step, N, grid, agents, NR, Tr);
         if (j ~= NUMITER)
             cla
         end
