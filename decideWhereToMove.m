@@ -25,6 +25,9 @@ function [ new_pos, new_fit ] = decideWhereToMove( S, agents, pos, fit, nPos, nF
         R = floor(S*0.3);
         new_pos = randomPosInRange(S, R, new_pos);
     end
+    
+    new_pos;
+    new_fit;
 end
 
 

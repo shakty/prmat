@@ -51,11 +51,11 @@ function agents = simulation( S, step, N, grid, agents, Nr , Tr)
 %     
 %    figure
     hold on
-    %plotlandscape(1,0,10,2);
+%    plotlandscape(1,0,10,2);
     plot(pos_agents(:,1),pos_agents(:,2),'bx'); 
     plot(publish_pos(:,1),publish_pos(:,2),'ro'); 
-    refreshdata
-    drawnow
+%    refreshdata
+%    drawnow
 %     
 %     
 %     z = zeros(S);     
@@ -68,6 +68,8 @@ function agents = simulation( S, step, N, grid, agents, Nr , Tr)
     ylim([0 1]);
     hold off
    
+    
+    
     pause(1);
     
     
