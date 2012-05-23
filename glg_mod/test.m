@@ -18,75 +18,8 @@ globalvalue = 1;
 
 ratio = 0.9;
 
-
-%% Generate rotation matrix
-
-e=diag(ones(1,dimension));   % unit diagonal matrix
-
-%%
-rotation = cell(nGaussian);
-for i=1:nGaussian
-    
-   rotation{i}=e;            % initial rotation matrix for each Gaussian
-   
-end
-
-%%
-
-for i=1:nGaussian            
-
-  for j=1:dimension-1        % totally n(n-1)/2 rotation matrice
-      
-      for k=j+1:dimension
-          
-        r=e;
-        
-        alpha=rand*pi/2-pi/4;% random rotation angle [-pi/4,pi/4]
-        
-        r(j,j)=cos(alpha);
-        r(j,k)=sin(alpha);
-        r(k,j)=-sin(alpha);
-        r(k,k)=cos(alpha);
-    
-        rotation{i}=rotation{i}*r;
-    
-     end
-    
-  end
-  
-end
-
-%% Generate covariance matrix
-
-variancerange=(upper-lower)/2000;   % this controls the range of variances
-
-variance=rand(nGaussian,dimension)*variancerange;  % add 0.05 to avoid zero variance
-
-variance = [0.0001; 0.001]
-
-%%
-
-for i=1:nGaussian
-
-      covmatrix=diag(variance(i,:));
-      covmatrix=rotation{i}'*covmatrix*rotation{i};
-      covmatrix_inv{i}=inv(covmatrix);
-      
-end
-
-%%
-
-% Generate mean vectors randomly within [lower, upper]
-meanvector=rand(nGaussian,dimension)*(upper-lower)+lower; 
-
-meanvector = [0.5, 0.5; 0.2, 0.2]
-
-% assign values to components
-optimumvalue(1)=globalvalue;     % the first Gaussian is set to be the global optimum
-
-% values of others are randomly generated within [0,globalvalue*ratio]
-optimumvalue(2:nGaussian)=rand(1,nGaussian-1)*globalvalue*ratio;
-
+global meanvector;
+meanvector = [0.5, 0.5];
 
 
 %-----------------------------------------------------
