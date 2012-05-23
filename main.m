@@ -31,8 +31,8 @@ grid = [0:step:1];
 
 %% Generate Landscape
 
-initialize(2,200,1,0,1,0.9);
-plotlandscape(1,0,300,3);
+initialize(2,2,1,0,1,0.9);
+plotlandscape(1,0,1000,3);
 
 %% Place Agents on landscape
 
