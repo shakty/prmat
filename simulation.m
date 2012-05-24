@@ -1,76 +1,77 @@
-function agents = simulation( S, step, N, grid, agents, Nr , Tr)
+function agents = simulation( NUMITER, landscape, agents, m_options, l_options)
 % function [score score_stats diffs dists dists_stats] = simulation( S, step, N, grid, agents, Nr , Tr)
 %SIMULATION Summary of this function goes here
 %   Detailed explanation goes here
 
-    % convert a position on the grid to a point in space
-    pos_agents = locateAgents(grid, agents);
+% convert a position on the grid to a point in space
+%pos_agents = locateAgents(grid, agents);
+
+%pos_agents
+%agents
+
+S   = m_options.S;
+N   = m_options.N;
+Nr  = m_options.Nr;
+Tr  = m_options.Tr;
+
+step    = l_options.step;
+upper   = l_options.upper;
+lower   = l_options.lower;
     
-    %pos_agents
-    %agents
     
-    % compute the fitness of all the points
-    f = fitness(pos_agents);
+for j=1:NUMITER
     
+    agents
+    % compute the fitness of all the agents
+    f = compfit(landscape,agents)
+    dede
     % compute the random indexes of the reviewers
     reviewers = latinSquare(N,Nr);
     
     % compute the score assigned by each reviewer to the
     % position of the agent in space
-    [score score_stats diffs dists dists_stats] = review(f, pos_agents, reviewers);
+    [score score_stats diffs dists dists_stats] = review(f, agents, reviewers, step);
      
-%     difdists = [diffs  dists_stats(:,1)]
-%     
-%     sorted_difdists = sortrows(difdists,2)
+    difdists = [diffs  dists_stats(:,1)];
+    sorted_difdists = sortrows(difdists,2);
+    
+%     figure
+%     plot(sorted_difdists(:,1), 'rx');
+%     title('Difference in evaluation for each agent sorted by distance distance');
 %     
 %     figure
-%     plot(sorted_difdists(:,1));
-%     
-%     
-%     figure
-%     plot(diffs, dists_stats(:,1),'rx')
-%     
-%     b = (diffs'*diffs)^-1 * (diffs'*dists_stats(:,1));
+%     plot(diffs, dists_stats(:,1),'rx');
+%     title('Avg difference in evaluation as a function of distance');
+    
+    
+%    b = (diffs'*diffs)^-1 * (diffs'*dists_stats(:,1));
 %     
 %     f = exp(mean(dists_stats(:,1)));
     
     
 
     % Publish
-    fit_t = f';
     publish_idx = find(score_stats(:,1) > Tr);
-    publish_fit = fit_t(publish_idx,:);
-    publish_pos = pos_agents(publish_idx,:);
-    
-%     size(publish_idx)
-%     size(publish_pos)
-%     size(publish_fit)
+    publish_fit = score_stats(publish_idx,1);
+    publish_pos = agents(publish_idx,:);
 
 %    publish = [ publish_idx publish_pos publish_fit ];
-%     
-%     
-%    figure
-    hold on
-%    plotlandscape(1,0,10,2);
-    plot(pos_agents(:,1),pos_agents(:,2),'bx'); 
-    plot(publish_pos(:,1),publish_pos(:,2),'ro'); 
-%    refreshdata
+ 
+%    landscapeContour(landscape, lower, upper, step);
 %    drawnow
-%     
-%     
-%     z = zeros(S);     
-%     for i=1:N
-%        z(agents(i,:)) = score_stats(i,1);
-%     end
-%     
-%     
-    xlim([0 1]);
-    ylim([0 1]);
-    hold off
+%    refreshdata
+%    hold on
+%    figure
+%    plot(agents(:,1),agents(:,2),'bx');
+%    plot(publish_pos(:,1),publish_pos(:,2),'ro'); 
+%    hold off
+% 
+%    xlim([0 1]);
+%    ylim([0 1]);
    
     
     
-    pause(1);
+%    pause(1);
     
     
     %figure
@@ -82,7 +83,7 @@ function agents = simulation( S, step, N, grid, agents, Nr , Tr)
     %hold off
     % Move
     
-    [agents new_fits] = move(S, N, grid, agents, f, publish_fit, publish_idx);
+    [agents new_fits] = move(S, N, landscape, agents, f, publish_fit, publish_idx);
     
 end
 

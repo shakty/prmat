@@ -1,4 +1,4 @@
-function [score, score_stats, diffs, dists, dists_stats] = review( fitness, agents, reviewers)
+function [score, score_stats, diffs, dists, dists_stats] = review( fitness, agents, reviewers, step)
 %REVIEW Summary of this function goes here
 %   Detailed explanation goes here
     
@@ -22,7 +22,8 @@ function [score, score_stats, diffs, dists, dists_stats] = review( fitness, agen
             r = agents(reviewers(i,j),:);
             
             % d: Eucledian distance points i,j
-            d = abs(norm(agents(i,:)) - norm(r));
+            % must be converted to real distance (*step)
+            d = abs(norm(agents(i,:)) - norm(r)) * step;
             dists(i,j) = d;
             
             

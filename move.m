@@ -1,4 +1,4 @@
-function [ newpos newfit ] = move( S, N, grid, agents, cur_fit, pubfit, pubidx)
+function [ newpos newfit ] = move( S, N, landscape, agents, cur_fit, pubfit, pubidx)
 %MOVE Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -12,8 +12,8 @@ function [ newpos newfit ] = move( S, N, grid, agents, cur_fit, pubfit, pubidx)
     
     for i=1:N
         pos = agents(i,:);
-        fit = cur_fit(:,i);
-        [nPos nFit] = analyzeNeighborhood(S, grid, pos);
+        fit = cur_fit(i,:);
+        [nPos nFit] = analyzeNeighborhood(S, landscape, pos);
         
         [newpos(i,:) newfit(i)] = decideWhereToMove(S, agents, pos, fit, nPos, nFit, pubfit, pubidx); 
 
@@ -25,7 +25,7 @@ end
 
 
 
-function [nPos, nMax] = analyzeNeighborhood(S, grid, pos)
+function [nPos, nMax] = analyzeNeighborhood(S, landscape, pos)
     
     nPos = [-1,-1];     % best neighbor position
     nMax = -1000;       % best neighbor fit
@@ -41,7 +41,7 @@ function [nPos, nMax] = analyzeNeighborhood(S, grid, pos)
        
         % Check that the cell is within the grid boundaries
         if (isWithinGrid(S, ngbr_r, ngbr_c))
-            f = compfit(grid, [ngbr_r, ngbr_c]);
+            f = landscape(ngbr_r, ngbr_c);
             if (f > nMax)
                 nMax = f;
                 nPos = [ngbr_r ngbr_c];

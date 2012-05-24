@@ -77,11 +77,11 @@ function fitLandscape = generateLandscape(options)
 
     fitLandscape = evaluateLandscape(space_begin, space_end, step, covmatrix_inv, meanvector, optima);
 
-    if (isfield(options, 'plot3D'))
+    if (isfield(options, 'plot3D') && options.plot3D)
         landscape3D(fitLandscape, lower, upper, step);
     end
 
-    if (isfield(options, 'plotContour'))
+    if (isfield(options, 'plotContour') && options.plotContour)
         landscapeContour(fitLandscape, lower, upper, step);
     end
 
