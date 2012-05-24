@@ -147,6 +147,9 @@ f=exp(-0.5*tmp/n);             % f is a nGaussian-by-p matrix
 
 %%
 
+optimumvalue
+
+
 f=f.*repmat(optimumvalue',1,p);% multiply the peak value of each component
 
 %%

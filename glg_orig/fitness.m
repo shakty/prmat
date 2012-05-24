@@ -19,6 +19,13 @@ global covmatrix_inv;  %the inverse covariance matrix of each component
 global meanvector;     %the mean of each component
 global optimumvalue;   %the peak value of each component
 
+display('eeh');
+
+optimumvalue
+covmatrix_inv
+meanvector
+
+
 if isempty(covmatrix_inv)|isempty(meanvector)|isempty(optimumvalue)
     
     disp('Run initialize function first!');

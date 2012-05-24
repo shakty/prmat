@@ -6,7 +6,7 @@ close all
 
 %% Add Gaussian Landscape Generator to path
 
-path(path, 'glg/');
+path(path, 'glg_mod/');
 
 
 %% Init parameters
@@ -25,14 +25,22 @@ S = 1 / step;   % total number of spots in the grid per side
 nClusters           = [0];    	% number of clusters of the initial positions
 clusterTightness    = [0.25];   % Tightness of clusters
 
-%% Generate Grid
 
-grid = [0:step:1];
 
 %% Generate Landscape
 
-initialize(2,200,1,0,1,0.9);
-plotlandscape(1,0,1000,3);
+options = struct( ...
+                    'nGaussian',    2, ...
+                    'upper',        1, ...
+                    'lower',        0, ...
+                    'space_begin',  0, ...
+                    'space_end',    1, ...
+                    'step',         0.001, ...
+                    'plot3D',       1, ...
+                    'plotContour',  1 ...
+);
+
+landscape = generateLandscape(options);
 
 %% Place Agents on landscape
 
@@ -50,7 +58,7 @@ for i=1:REPEAT
     for j=1:NUMITER
         %agents = simulation(S, step, N, grid, agents, NR, Tr);
         if (j ~= NUMITER)
-            cla
+            %cla
         end
         j
     end

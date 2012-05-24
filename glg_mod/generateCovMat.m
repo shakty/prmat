@@ -1,4 +1,4 @@
-function covmatrix_inv = generateCovMat(dimension, nGaussian)
+function covmatrix_inv = generateCovMat(dimension, nGaussian, variance)
 
 %--------------------------------------------------------------------------
 %Generates the covariance matrix for the gaussian landscape
@@ -8,18 +8,15 @@ function covmatrix_inv = generateCovMat(dimension, nGaussian)
 %Example:generateCovMat(2,10)
 %
 %Inputs: 
-%        dimensionality
-%        upper and lower boundaries
+%           dimensionality
+%           upper and lower boundaries
+%           the variance of each component
 %
 %Outputs:
-%        inverse covariance matrix
-%        component peak value
+%           inverse covariance matrix
+%           component peak value
 %
 %--------------------------------------------------------------------------
-
-
-    global variance;        %the variance of each component
-
 
     % Generate rotation matrix
     e=diag(ones(1,dimension));   % unit diagonal matrix
@@ -49,7 +46,7 @@ function covmatrix_inv = generateCovMat(dimension, nGaussian)
     end
 
 
-
+    covmatrix_inv = cell(nGaussian);
     for i=1:nGaussian
           covmatrix=diag(variance(i,:));
           covmatrix=rotation{i}'*covmatrix*rotation{i};
