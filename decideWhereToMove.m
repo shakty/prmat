@@ -2,10 +2,6 @@ function [ new_pos, new_fit ] = decideWhereToMove( S, agents, pos, fit, nPos, nF
 %DECIDEWHERETOMOVE Summary of this function goes here
 %   Detailed explanation goes here
 
-    fit
-    pubfit;
-    pubidx;
-
     % Compare neighbor position
     if (nFit > fit) 
         new_pos = nPos;
@@ -31,7 +27,7 @@ function [ new_pos, new_fit ] = decideWhereToMove( S, agents, pos, fit, nPos, nF
     end
     
     new_pos;
-    new_fit
+    new_fit;
 end
 
 

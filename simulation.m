@@ -20,11 +20,10 @@ lower   = l_options.lower;
     
     
 for j=1:NUMITER
-    
-    agents
+
     % compute the fitness of all the agents
-    f = compfit(landscape,agents)
-    dede
+    f = compfit(landscape,agents);
+
     % compute the random indexes of the reviewers
     reviewers = latinSquare(N,Nr);
     
@@ -60,18 +59,18 @@ for j=1:NUMITER
 %    landscapeContour(landscape, lower, upper, step);
 %    drawnow
 %    refreshdata
-%    hold on
-%    figure
-%    plot(agents(:,1),agents(:,2),'bx');
-%    plot(publish_pos(:,1),publish_pos(:,2),'ro'); 
-%    hold off
-% 
-%    xlim([0 1]);
-%    ylim([0 1]);
+   hold on
+   %figure
+   plot(agents(:,1)*step,agents(:,2)*step,'bx');
+   plot(publish_pos(:,1)*step,publish_pos(:,2)*step,'ro'); 
+   hold off
+
+   xlim([0 1]);
+   ylim([0 1]);
    
     
     
-%    pause(1);
+    pause(0.1);
     
     
     %figure
